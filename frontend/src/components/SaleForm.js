@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 /**
  * Componente para registrar una venta seleccionando un producto y cantidad.
@@ -14,7 +15,14 @@ const SaleForm = ({ closeModal, products, onSaleCompleted }) => {
     axios
       .post("http://localhost:5000/api/sales", { productId, quantity })
       .then(() => {
-        alert("Venta registrada con éxito");
+        Swal.fire({
+          icon: "success",
+          title: "Venta registrada",
+          text: "La venta se registró exitosamente.",
+          confirmButtonText: "Aceptar",
+        });
+
+        // Limpiar valores del form
         setQuantity("");
         setProductId("");
 
@@ -25,6 +33,14 @@ const SaleForm = ({ closeModal, products, onSaleCompleted }) => {
       })
       .catch((error) => {
         console.error("Error al registrar venta:", error);
+
+        // Mostrar mensaje de error
+        Swal.fire({
+          icon: "error",
+          title: "Error al registrar venta",
+          text: "Ocurrió un problema al registrar la venta. Stock insuficiente.",
+          confirmButtonText: "Aceptar",
+        });
       });
   };
 

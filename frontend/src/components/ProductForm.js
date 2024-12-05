@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2"; // Importar SweetAlert para las notificaciones
 
 /**
  * Componente de formulario para agregar un nuevo producto al inventario.
@@ -25,7 +26,14 @@ const ProductForm = ({ closeModal, onProductAdded }) => {
         stock: parseInt(stock),
       });
 
-      alert(`Producto agregado: ${response.data.name}`);
+      // Alerta de producto agregado
+      Swal.fire({
+        icon: "success",
+        title: "Producto agregado",
+        text: `Se agregó correctamente: ${response.data.name}`,
+        confirmButtonText: "Aceptar",
+      });
+
       setName("");
       setReference("");
       setPrice("");
@@ -38,8 +46,11 @@ const ProductForm = ({ closeModal, onProductAdded }) => {
       closeModal();
       window.location.reload();
     } catch (error) {
-      console.error("Error al agregar producto:", error);
-      alert("Error al agregar producto, inténtalo nuevamente.");
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "No se pudo agregar el producto. Inténtalo nuevamente.",
+      });
     }
   };
 
