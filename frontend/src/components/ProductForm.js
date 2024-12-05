@@ -4,7 +4,7 @@ import axios from "axios";
 /**
  * Componente de formulario para agregar un nuevo producto al inventario
  */
-const ProductForm = () => {
+const ProductForm = ({ closeModal }) => {
     // Estados para almacenar los datos del formulario
     const [name, setName] = useState('');
     const [reference, setReference] = useState('');
@@ -38,6 +38,9 @@ const ProductForm = () => {
             setWeight('');
             setCategory('');
             setStock('');
+
+            // Cerrar el modal después de agregar el producto
+            closeModal();
         } catch (error) {
             console.error('Error al agregar producto', error);
             alert('Error al agregar producto, inténtalo nuevamente.');
