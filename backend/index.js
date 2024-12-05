@@ -5,6 +5,7 @@ const express = require('express'); // Framework para construir el servidor
 const bodyParser = require('body-parser'); // Middleware para procesar JSON
 const cors = require('cors'); // Middleware para permitir solicitudes CORS
 const mongoose = require('mongoose'); // Libreria para conectarse a MongoDB
+const productRoutes = require('./routes/products');
 
 // Crear una instacia de la aplicación Express
 const app = express();
@@ -32,6 +33,9 @@ app.use(cors()); // Permitir solicitudes desde cualquier origen
 app.get('/', (req, res) => {
     res.send('Servidor funcionando correctamente'); // Respuesta al cliente
 });
+
+// Rutas de productos
+app.use('/api/products', productRoutes);
 
 // Iniciar servidor - Escucha las solicitudes en el puerto indicado (5000)
 app.listen(PORT, () => {
