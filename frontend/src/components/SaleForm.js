@@ -38,11 +38,13 @@ const SaleForm = ({ closeModal, products, onSaleCompleted }) => {
           required
         >
           <option value="">Seleccionar Producto</option>
-          {products.map((product) => (
-            <option key={product._id} value={product._id}>
-              {product.name} (Stock: {product.stock})
-            </option>
-          ))}
+          {products
+            .filter((product) => product.stock > 0) // Filtrar productos con stock > 0
+            .map((product) => (
+              <option key={product._id} value={product._id}>
+                {product.name} (Stock: {product.stock})
+              </option>
+            ))}
         </select>
         <input
           type="number"
