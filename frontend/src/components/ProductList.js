@@ -96,8 +96,10 @@ const ProductList = () => {
                 <th>Nombre</th>
                 <th>Referencia</th>
                 <th>Precio</th>
+                <th>Peso (g)</th>
                 <th>Categoría</th>
                 <th>Stock</th>
+                <th>Fecha de Creado</th>
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -108,8 +110,19 @@ const ProductList = () => {
                   <td>{product.name}</td>
                   <td>{product.reference}</td>
                   <td>{product.price}</td>
+                  <td>{product.weight}</td>
                   <td>{product.category}</td>
                   <td>{product.stock}</td>
+                  <td>{new Date(product.createdAt).toLocaleString('es-ES', { 
+                    year: 'numeric', 
+                    month: '2-digit', 
+                    day: '2-digit', 
+                    hour: '2-digit', 
+                    minute: '2-digit', 
+                    second: '2-digit', 
+                    hour12: false 
+                    })}
+                  </td>
                   <td>
                     <button
                       onClick={() => openEditModal(product)}

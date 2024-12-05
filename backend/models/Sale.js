@@ -14,9 +14,9 @@ const saleSchema = new mongoose.Schema({
     },
     quantity: {
         type: Number, // Cantidad vendida
-        default: Date.now
+        required: true
     },
-});
+}, {timestamps: true});
 
 // Exportar el modelo
 module.exports = mongoose.model('Sale', saleSchema);

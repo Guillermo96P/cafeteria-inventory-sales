@@ -109,7 +109,16 @@ const App = () => {
               <td>{sale.productId ? sale.productId.name : "Producto no disponible"}</td>
               <td>{sale.quantity}</td>
               <td>{sale.productId ? sale.productId.price * sale.quantity : "N/A"}</td>
-              <td>{new Date(sale.createdAt).toLocaleString()}</td>
+              <td>{new Date(sale.createdAt).toLocaleString('es-ES', { 
+                year: 'numeric', 
+                month: '2-digit', 
+                day: '2-digit', 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit', 
+                hour12: false 
+                })}
+              </td>
           </tr>
           ))}
         </tbody>
