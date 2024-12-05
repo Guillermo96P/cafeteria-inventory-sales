@@ -131,3 +131,30 @@ body {
   background-color: white;
   color: black;
 }
+
+/* Estilos para la paginación */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination-container button {
+  margin: 0 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #398ae0;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+}
+
+.pagination-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination-container span {
+  font-size: 16px;
+}
