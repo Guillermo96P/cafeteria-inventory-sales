@@ -105,9 +105,9 @@ const ProductList = () => {
                 </tr>
               </thead>
               <tbody>
-                {products.map((product) => (
+                {products.map((product, index) => (
                   <tr className="table-row" key={product._id}>
-                    <td className="table-info">{product._id}</td>
+                    <td className="table-info">{index + 1}</td>
                     <td>{product.name}</td>
                     <td>{product.reference}</td>
                     <td className="table-price">{product.price}</td>
