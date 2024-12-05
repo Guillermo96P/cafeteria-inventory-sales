@@ -144,62 +144,62 @@ const ProductList = () => {
             </table>    
             {/* Modal para editar el producto */}
             <Modal isOpen={isModalOpen} onRequestClose={closeModal} contentLabel="Editar Producto">
-              <h2>Editar Producto</h2>
-              <form>
-                <label>
-                  Nombre:
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name || ""}
-                    onChange={handleInputChange}
-                  />
-                </label>
-                <br />
-                <label>
-                  Referencia:
-                  <input
-                    type="text"
-                    name="reference"
-                    value={formData.reference || ""}
-                    onChange={handleInputChange}
-                  />
-                </label>
-                <br />
-                <label>
-                  Precio:
-                  <input
-                    type="number"
-                    name="price"
-                    value={formData.price || ""}
-                    onChange={handleInputChange}
-                  />
-                </label>
-                <br />
-                <label>
-                  Categoría:
-                  <input
-                    type="text"
-                    name="category"
-                    value={formData.category || ""}
-                    onChange={handleInputChange}
-                  />
-                </label>
-                <br />
-                <label>
-                  Stock:
-                  <input
-                    type="number"
-                    name="stock"
-                    value={formData.stock || ""}
-                    onChange={handleInputChange}
-                  />
-                </label>
-              </form>
-              <button onClick={handleSaveChanges} style={{ marginRight: "10px" }}>
-                Guardar Cambios
-              </button>
-              <button onClick={closeModal}>Cancelar</button>
+              <div className="product-form-modal">
+                <h2>Editar Producto</h2>
+                <form>
+                  <label>
+                    Nombre:
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name || ""}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label>
+                    Referencia:
+                    <input
+                      type="text"
+                      name="reference"
+                      value={formData.reference || ""}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label>
+                    Precio:
+                    <input
+                      type="number"
+                      name="price"
+                      value={formData.price || ""}
+                      onChange={handleInputChange}
+                    />
+                  </label>  
+                  <label>
+                    Categoría:
+                    <input
+                      type="text"
+                      name="category"
+                      value={formData.category || ""}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <label>
+                    Stock:
+                    <input
+                      type="number"
+                      name="stock"
+                      value={formData.stock || ""}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                </form>
+                <div className="form-buttons">
+                  <button className="btn-primary" onClick={handleSaveChanges} style={{ marginRight: "10px" }}>
+                    Guardar Cambios
+                  </button>
+                  <button className="btn-secondary" onClick={closeModal}>Cancelar</button>
+                </div>
+              </div>
             </Modal>
             </div>
         </div>
