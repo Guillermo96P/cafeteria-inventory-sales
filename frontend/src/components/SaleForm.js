@@ -5,7 +5,7 @@ import axios from "axios";
  * Componente para registrar una venta seleccionando un producto y cantidad
  */
 
-const SaleForm = () => {
+const SaleForm = ({ closeModal }) => {
     const [products, setProducts] = useState([]);
     const [productId, setProductId] = useState('');
     const [quantity, setQuantity] = useState('');
@@ -29,6 +29,9 @@ const SaleForm = () => {
             alert('Venta registrada con exito');
             setQuantity('');
             setProductId('');
+
+            // Cerrar el modal
+            closeModal();
         })
         .catch(error => {
             console.error('Error al registrar venta:', error);
