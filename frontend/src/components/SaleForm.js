@@ -29,7 +29,7 @@ const SaleForm = ({ closeModal, products, onSaleCompleted }) => {
   };
 
   return (
-    <div>
+    <div className="product-form-modal">
       <h2>Registrar Venta</h2>
       <form onSubmit={handleSubmit}>
         <select
@@ -53,8 +53,10 @@ const SaleForm = ({ closeModal, products, onSaleCompleted }) => {
           onChange={(e) => setQuantity(e.target.value)}
           required
         />
-        <button type="submit">Registrar Venta</button>
-        <button type="button" onClick={closeModal}>Cancelar</button>
+        <div className="form-buttons">
+          <button className="btn-primary" type="submit">Registrar Venta</button>
+          <button className="btn-secondary" type="button" onClick={closeModal}>Cancelar</button>
+        </div>
       </form>
     </div>
   );
