@@ -14,6 +14,7 @@ const App = () => {
   const [sales, setSales] = useState([]); // Estado para historial de ventas
   const [isProductFormOpen, setIsProductFormOpen] = useState(false); // Estado para el modal de agregar producto
   const [isSaleFormOpen, setIsSaleFormOpen] = useState(false); // Estado para el modal de realizar venta
+  const [isSalesHistoryOpen, setIsSalesHistoryOpen] = useState(false); // Estado para el modal de historial de Ventas
   const [currentPage, setCurrentPage] = useState(1); // Estado de la paginación
   const rowsPerPage = 4;
 
@@ -75,17 +76,31 @@ const App = () => {
   };
 
   /**
-   * Función para abrir el modal de realizar venta.
+   * Función para abrir el modal de realizar venta
    */
   const openSaleFormModal = () => {
     setIsSaleFormOpen(true);
   };
 
   /**
-   * Función para cerrar el modal de realizar venta.
+   * Función para cerrar el modal de realizar venta
    */
   const closeSaleFormModal = () => {
     setIsSaleFormOpen(false);
+  };
+  /**
+   * Función para abrir el modal de historial de ventas
+   */
+
+  const openSalesHistoryModal = () => {
+    setIsSalesHistoryOpen(true);
+  }
+
+  /**
+   * Función para cerrar el modal de Historial de ventas
+   */
+  const closeSalesHistoryModal = () => {
+    setIsSalesHistoryOpen(false);
   };
 
   return (
@@ -101,68 +116,73 @@ const App = () => {
           <button className="btn btn-secondary" onClick={openSaleFormModal}>
             Realizar Venta
           </button>
+          <button className="btn btn-secondary" onClick={openSalesHistoryModal}>
+            Ver Historial de Ventas
+          </button>
         </div>
-
+        {/* Modal de agregar producto */}
         <Modal isOpen={isProductFormOpen} onRequestClose={closeProductFormModal}>
           <ProductForm closeModal={closeProductFormModal} onProductAdded={fetchProducts} />
         </Modal>
-
+        {/* Modal de realizar venta */}
         <Modal isOpen={isSaleFormOpen} onRequestClose={closeSaleFormModal}>
           <SaleForm closeModal={closeSaleFormModal} products={products} onSaleCompleted={fetchSales} />
         </Modal>
-
-        <ProductList products={products} />
-
-        <h2>Historial de Ventas</h2>
-        <table className="sales-table">
-          <thead>
-            <tr>
-              <th>Número de Venta</th>
-              <th>Nombre del Producto</th>
-              <th>Cantidad</th>
-              <th>Precio Total</th>
-              <th>Fecha de Venta</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentSales.map((sale) => (
-              <tr key={sale._id}>
-                <td>{sale._id}</td>
-                <td>{sale.productId ? sale.productId.name : "Producto no disponible"}</td>
-                <td>{sale.quantity}</td>
-                <td>{sale.productId ? sale.productId.price * sale.quantity : "N/A"}</td>
-                <td>
-                  {new Date(sale.createdAt).toLocaleString('es-ES', {
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    second: '2-digit',
-                    hour12: false
-                  })}
-                </td>
+        {/* Modal de historial de ventas */}
+        <Modal isOpen={isSalesHistoryOpen} onRequestClose={closeSalesHistoryModal}>
+          <h2>Historial de Ventas</h2>
+          <table className="sales-table">
+            <thead>
+              <tr>
+                <th>Número de Venta</th>
+                <th>Nombre del Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Total</th>
+                <th>Fecha de Venta</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-        
-        {/* Paginación */}
-        <div className="pagination-container">
-          <button 
-            disabled={currentPage === 1} 
-            onClick={() => handlePageChange(currentPage - 1)}
-          >
-            Anterior
-          </button>
-          <span>{currentPage} de {totalPages}</span>
-          <button 
-            disabled={currentPage === totalPages} 
-            onClick={() => handlePageChange(currentPage + 1)}
-          >
-            Siguiente
-          </button>
-        </div>
+            </thead>
+            <tbody>
+              {currentSales.map((sale) => (
+                <tr key={sale._id}>
+                  <td>{sale._id}</td>
+                  <td>{sale.productId ? sale.productId.name : "Producto no disponible"}</td>
+                  <td>{sale.quantity}</td>
+                  <td>{sale.productId ? sale.productId.price * sale.quantity : "N/A"}</td>
+                  <td>
+                    {new Date(sale.createdAt).toLocaleString("es-ES", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                      hour12: false,
+                    })}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          {/* Paginación */}
+          <div className="pagination-container">
+            <button 
+              disabled={currentPage === 1} 
+              onClick={() => handlePageChange(currentPage - 1)}
+            >
+              Anterior
+            </button>
+            <span>{currentPage} de {totalPages}</span>
+            <button 
+              disabled={currentPage === totalPages} 
+              onClick={() => handlePageChange(currentPage + 1)}
+            >
+              Siguiente
+            </button>
+          </div>
+          <button className="btn-secondary" onClick={closeSalesHistoryModal}>Cerrar</button>
+        </Modal>
+        <ProductList products={products} />
       </main>
     </div>
   );
