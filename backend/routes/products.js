@@ -34,9 +34,30 @@ router.get('/', async (req, res) => {
  */
 router.post('/', async (req, res) => {
     try {
-        const newProduct = new Product(req.body); // Crea un nuevo producto con los datos del cuerpo del servidor
-        await newProduct.save(); // Guardar el producto en la base de datos
-        res.status(201).json(newProduct); // Devuelve el producto creado
+        // Extraer los datos de la solicitud
+        const { name, reference, price, weight, category, stock } = req.body;
+
+        // Verificar que todos los campos obligatorios esten presentes
+        if (!name || !reference || !price || !weight || !category || stock === undefined ) {
+            return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+        }
+
+        // Crear un nuevo producto utilizando el modelo
+        const newProduct = new Product({
+            name, 
+            reference,
+            price,
+            weight,
+            category,
+            stock,
+            createdAt: new Date(), // Establece la fecha de creación actual
+        });
+
+        // Guarda el producto en la base de datos
+        await newProduct.save();
+
+        // Responder con el producto creado
+        res.status(201).json(newProduct);
     } catch (error) {
         res.status(400).json({ message: 'Error al crear el producto', error });  
     }

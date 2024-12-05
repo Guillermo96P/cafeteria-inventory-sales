@@ -5,7 +5,8 @@ const express = require('express'); // Framework para construir el servidor
 const bodyParser = require('body-parser'); // Middleware para procesar JSON
 const cors = require('cors'); // Middleware para permitir solicitudes CORS
 const mongoose = require('mongoose'); // Libreria para conectarse a MongoDB
-const productRoutes = require('./routes/products');
+const productRoutes = require('./routes/products'); // Rutas de los productos
+const saleRoutes = require('./routes/sales'); // Ruta de las ventas
 
 // Crear una instacia de la aplicación Express
 const app = express();
@@ -34,8 +35,11 @@ app.get('/', (req, res) => {
     res.send('Servidor funcionando correctamente'); // Respuesta al cliente
 });
 
-// Rutas de productos
+// Rutas de productos usando /api/products
 app.use('/api/products', productRoutes);
+
+// Rutas de ventas usando /api/sales
+app.use('/api/sales', saleRoutes);
 
 // Iniciar servidor - Escucha las solicitudes en el puerto indicado (5000)
 app.listen(PORT, () => {
