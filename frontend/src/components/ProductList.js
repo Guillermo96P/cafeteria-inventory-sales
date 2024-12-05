@@ -86,121 +86,122 @@ const ProductList = () => {
         }
     };
     return (
-        <div>
-          <h2>Lista de Productos</h2>
+        <div className="table-container">
+          <h2 className="table-title">Lista de Productos</h2>
           {/* Tabla para mostrar los productos */}
-          <table border="1" cellPadding="10" style={{ width: "100%", textAlign: "left" }}>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Referencia</th>
-                <th>Precio</th>
-                <th>Peso (g)</th>
-                <th>Categoría</th>
-                <th>Stock</th>
-                <th>Fecha de Creado</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((product) => (
-                <tr key={product._id}>
-                  <td>{product._id}</td>
-                  <td>{product.name}</td>
-                  <td>{product.reference}</td>
-                  <td>{product.price}</td>
-                  <td>{product.weight}</td>
-                  <td>{product.category}</td>
-                  <td>{product.stock}</td>
-                  <td>{new Date(product.createdAt).toLocaleString('es-ES', { 
-                    year: 'numeric', 
-                    month: '2-digit', 
-                    day: '2-digit', 
-                    hour: '2-digit', 
-                    minute: '2-digit', 
-                    second: '2-digit', 
-                    hour12: false 
-                    })}
-                  </td>
-                  <td>
-                    <button
-                      onClick={() => openEditModal(product)}
-                      style={{ marginRight: "10px" }}
-                    >
-                      Editar
-                    </button>
-                    <button
-                      onClick={() => handleDelete(product._id)}
-                      style={{ backgroundColor: "red", color: "white" }}
-                    >
-                      Eliminar
-                    </button>
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead className="table-header">
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Referencia</th>
+                  <th>Precio</th>
+                  <th>Peso (g)</th>
+                  <th>Categoría</th>
+                  <th>Stock</th>
+                  <th>Fecha de Creado</th>
+                  <th>Acciones</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-    
-          {/* Modal para editar el producto */}
-          <Modal isOpen={isModalOpen} onRequestClose={closeModal} contentLabel="Editar Producto">
-            <h2>Editar Producto</h2>
-            <form>
-              <label>
-                Nombre:
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name || ""}
-                  onChange={handleInputChange}
-                />
-              </label>
-              <br />
-              <label>
-                Referencia:
-                <input
-                  type="text"
-                  name="reference"
-                  value={formData.reference || ""}
-                  onChange={handleInputChange}
-                />
-              </label>
-              <br />
-              <label>
-                Precio:
-                <input
-                  type="number"
-                  name="price"
-                  value={formData.price || ""}
-                  onChange={handleInputChange}
-                />
-              </label>
-              <br />
-              <label>
-                Categoría:
-                <input
-                  type="text"
-                  name="category"
-                  value={formData.category || ""}
-                  onChange={handleInputChange}
-                />
-              </label>
-              <br />
-              <label>
-                Stock:
-                <input
-                  type="number"
-                  name="stock"
-                  value={formData.stock || ""}
-                  onChange={handleInputChange}
-                />
-              </label>
-            </form>
-            <button onClick={handleSaveChanges} style={{ marginRight: "10px" }}>
-              Guardar Cambios
-            </button>
-            <button onClick={closeModal}>Cancelar</button>
-          </Modal>
+              </thead>
+              <tbody>
+                {products.map((product) => (
+                  <tr className="table-row" key={product._id}>
+                    <td className="table-info">{product._id}</td>
+                    <td>{product.name}</td>
+                    <td>{product.reference}</td>
+                    <td className="table-price">{product.price}</td>
+                    <td>{product.weight}</td>
+                    <td className="table-category">{product.category}</td>
+                    <td>{product.stock}</td>
+                    <td>{new Date(product.createdAt).toLocaleString('es-ES', { 
+                      year: 'numeric', 
+                      month: '2-digit', 
+                      day: '2-digit', 
+                      hour: '2-digit', 
+                      minute: '2-digit', 
+                      second: '2-digit', 
+                      hour12: false 
+                      })}
+                    </td>
+                    <td className="table-actions">
+                      <button
+                        onClick={() => openEditModal(product)}
+                        className="edit-btn"
+                      >
+                        Editar
+                      </button>
+                      <button
+                        onClick={() => handleDelete(product._id)}
+                        className="delete-btn"
+                      >
+                        Eliminar
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>    
+            {/* Modal para editar el producto */}
+            <Modal isOpen={isModalOpen} onRequestClose={closeModal} contentLabel="Editar Producto">
+              <h2>Editar Producto</h2>
+              <form>
+                <label>
+                  Nombre:
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name || ""}
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <br />
+                <label>
+                  Referencia:
+                  <input
+                    type="text"
+                    name="reference"
+                    value={formData.reference || ""}
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <br />
+                <label>
+                  Precio:
+                  <input
+                    type="number"
+                    name="price"
+                    value={formData.price || ""}
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <br />
+                <label>
+                  Categoría:
+                  <input
+                    type="text"
+                    name="category"
+                    value={formData.category || ""}
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <br />
+                <label>
+                  Stock:
+                  <input
+                    type="number"
+                    name="stock"
+                    value={formData.stock || ""}
+                    onChange={handleInputChange}
+                  />
+                </label>
+              </form>
+              <button onClick={handleSaveChanges} style={{ marginRight: "10px" }}>
+                Guardar Cambios
+              </button>
+              <button onClick={closeModal}>Cancelar</button>
+            </Modal>
+            </div>
         </div>
       );
 };
