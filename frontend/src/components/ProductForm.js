@@ -44,7 +44,7 @@ const ProductForm = ({ closeModal, onProductAdded }) => {
   };
 
   return (
-    <div>
+    <div className="product-form-modal">
       <h2>Agregar Producto</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -89,8 +89,10 @@ const ProductForm = ({ closeModal, onProductAdded }) => {
           onChange={(e) => setStock(e.target.value)}
           required
         />
-        <button type="submit">Agregar Producto</button>
-        <button type="button" onClick={closeModal}>Cancelar</button>
+        <div className="form-buttons">
+          <button className="btn-primary" type="submit">Agregar Producto</button>
+          <button className="btn-secondary" type="button" onClick={closeModal}>Cancelar</button>
+        </div>
       </form>
     </div>
   );
